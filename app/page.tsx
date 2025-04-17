@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -17,200 +16,17 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import dynamic from "next/dynamic";
 import { Chatbot } from "./components/chatbot";
+import BillingSection from "./components/billing-section";
+import Navbar from "./components/navbar";
+import ZapierWrapper from "./components/zapier-wrapper";
+import TypingAnimation from "./components/typing-animation";
 
-const ZapierEmbed = dynamic(() => import("./components/zapier-embed"), {
-  ssr: false,
-});
-
-export default function LandingPage() {
-  const [isAnnual, setIsAnnual] = useState(true);
-  const [showScrollTop, setShowScrollTop] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
+export default async function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      {showScrollTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-24 right-4 z-[100] p-4 rounded-full bg-primary text-white shadow-lg hover:bg-primary/90 transition-all"
-          aria-label="Scroll to top"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="m18 15-6-6-6 6" />
-          </svg>
-        </button>
-      )}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 sm:h-16 items-center justify-between px-4 md:px-6">
-          <div className="flex items-center -ml-2 sm:-ml-3">
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="cursor-pointer"
-            >
-              <Image
-                src="/echosync-logo.png"
-                alt="EchoSync Logo"
-                width={140}
-                height={37}
-                priority
-                className="object-contain w-[140px] sm:w-[200px]"
-              />
-            </button>
-          </div>
-          <nav className="hidden md:flex gap-6">
-            <Link
-              href="#"
-              className="text-sm font-medium hover:text-primary"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              Home
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="text-sm font-medium hover:text-primary"
-            >
-              How It Works
-            </Link>
-            <Link
-              href="#features"
-              className="text-sm font-medium hover:text-primary"
-            >
-              Features
-            </Link>
-            <Link
-              href="#integrations"
-              className="text-sm font-medium hover:text-primary"
-            >
-              Integrations
-            </Link>
-            <Link
-              href="#pricing"
-              className="text-sm font-medium hover:text-primary"
-            >
-              Pricing
-            </Link>
-            <Link
-              href="#blog"
-              className="text-sm font-medium hover:text-primary"
-            >
-              Blog
-            </Link>
-          </nav>
-          <div className="flex items-center gap-2 sm:gap-4">
-            <Link
-              href="/login"
-              className="text-sm font-medium hover:text-primary hidden sm:block"
-            >
-              Login
-            </Link>
-            <Button
-              variant="outline"
-              className="text-sm px-3 py-2 h-auto"
-              asChild
-            >
-              <Link
-                href="https://calendly.com/faizanmd/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Schedule Free Demo
-              </Link>
-            </Button>
-            <Button
-              asChild
-              className="bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm px-3 sm:px-4 h-auto py-2"
-            >
-              <Link href="/signup">Get Started</Link>
-            </Button>
-            <button
-              className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-background border-t">
-            <nav className="container px-4 py-4">
-              <div className="flex flex-col space-y-4">
-                <Link
-                  href="#features"
-                  className="text-sm font-medium hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Features
-                </Link>
-                <Link
-                  href="#integrations"
-                  className="text-sm font-medium hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Integrations
-                </Link>
-                <Link
-                  href="#how-it-works"
-                  className="text-sm font-medium hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  How It Works
-                </Link>
-                <Link
-                  href="#pricing"
-                  className="text-sm font-medium hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Pricing
-                </Link>
-                <Link
-                  href="#blog"
-                  className="text-sm font-medium hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/login"
-                  className="text-sm font-medium hover:text-primary"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Login
-                </Link>
-              </div>
-            </nav>
-          </div>
-        )}
-      </header>
+      <Navbar />
       <main className="flex-1">
         <section className="pt-8 sm:pt-12 md:pt-16">
           <div className="container px-4 md:px-6">
@@ -311,8 +127,8 @@ export default function LandingPage() {
                   </svg>
                 </div>
                 <blockquote className="text-lg sm:text-xl md:text-2xl font-medium text-gray-900 dark:text-white mb-6">
-                  &quot;EchoSync has transformed how we manage our online
-                  reputation.&quot; - Happy Customer
+                  &quot;They help set it up and every customer gets a review
+                  request automatically!&quot;
                 </blockquote>
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -857,63 +673,18 @@ export default function LandingPage() {
                                 Your Business
                               </div>
                               <div className="text-sm text-gray-600 mt-1">
-                                <div className="typing-container">
-                                  <span className="typing-line">
-                                    Thank you so much for your kind words,
-                                    Sarah!
-                                  </span>
-                                  <span className="typing-line">
-                                    We&apos;re thrilled that you had such a
-                                    positive experience.
-                                  </span>
-                                  <span className="typing-line">
-                                    Our team works hard to provide exceptional
-                                    service, and we&apos;re glad it showed.
-                                  </span>
-                                  <span className="typing-line">
-                                    We look forward to serving you again soon!
-                                  </span>
-                                </div>
+                                <TypingAnimation
+                                  lines={[
+                                    "Thank you so much for your kind words, Sarah!",
+                                    "We're thrilled that you had such a positive experience.",
+                                    "Our team works hard to provide exceptional service, and we're glad it showed.",
+                                    "We look forward to serving you again soon!",
+                                  ]}
+                                />
                               </div>
                               <div className="text-xs text-gray-400 mt-1">
                                 AI-generated response • 2 minutes ago
                               </div>
-
-                              <style jsx global>{`
-                                .typing-container {
-                                  display: flex;
-                                  flex-direction: column;
-                                  gap: 0.25rem;
-                                }
-
-                                .typing-line {
-                                  display: block;
-                                  opacity: 0;
-                                  animation: typingLine 0.5s forwards;
-                                }
-
-                                .typing-line:nth-child(1) {
-                                  animation-delay: 0s;
-                                }
-                                .typing-line:nth-child(2) {
-                                  animation-delay: 1.5s;
-                                }
-                                .typing-line:nth-child(3) {
-                                  animation-delay: 3s;
-                                }
-                                .typing-line:nth-child(4) {
-                                  animation-delay: 4.5s;
-                                }
-
-                                @keyframes typingLine {
-                                  from {
-                                    opacity: 0;
-                                  }
-                                  to {
-                                    opacity: 1;
-                                  }
-                                }
-                              `}</style>
                             </div>
                           </div>
                         </div>
@@ -965,250 +736,14 @@ export default function LandingPage() {
                 </div>
 
                 <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6">
-                  <ZapierEmbed />
+                  <ZapierWrapper />
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="pricing" className="py-12 sm:py-16 md:py-20">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center mb-8 sm:mb-12">
-              <div className="space-y-2 sm:space-y-3">
-                <div className="inline-block rounded-lg bg-primary px-3 py-1 text-sm text-primary-foreground">
-                  Pricing
-                </div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter px-4">
-                  Choose Your Plan
-                </h2>
-                <p className="max-w-[900px] text-gray-500 text-base sm:text-lg md:text-xl px-4">
-                  Simple, transparent pricing that grows with your business
-                </p>
-              </div>
-
-              {/* Billing Toggle */}
-              <div className="bg-background rounded-full p-1 inline-flex items-center mt-6 sm:mt-8 border">
-                <button
-                  onClick={() => setIsAnnual(false)}
-                  className={`px-3 sm:px-4 py-2 rounded-full text-sm transition-all ${
-                    !isAnnual
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  Monthly
-                </button>
-                <button
-                  onClick={() => setIsAnnual(true)}
-                  className={`px-3 sm:px-4 py-2 rounded-full flex items-center text-sm transition-all ${
-                    isAnnual
-                      ? "bg-primary text-primary-foreground"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  Annual
-                  <span className="ml-1 sm:ml-2 bg-green-500 text-white text-xs px-1.5 sm:px-2 py-0.5 rounded-full">
-                    Save 40%
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto">
-              {/* Starter Plan */}
-              <div className="relative bg-background rounded-2xl border p-6 sm:p-8">
-                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
-                  Starter
-                </h3>
-                <div className="flex items-baseline gap-1">
-                  {isAnnual && (
-                    <span className="text-gray-500 line-through text-base sm:text-lg">
-                      $29
-                    </span>
-                  )}
-                  <span className="text-3xl sm:text-4xl font-bold">
-                    ${isAnnual ? "17" : "29"}
-                  </span>
-                  <span className="text-gray-500">/mo</span>
-                </div>
-                <div className="text-xs sm:text-sm mt-2">
-                  {isAnnual ? (
-                    <span className="text-green-500">
-                      Annual billing saves you $144
-                    </span>
-                  ) : (
-                    "Monthly billing"
-                  )}
-                </div>
-                <div className="mt-3 sm:mt-4 text-gray-500 text-sm">
-                  ~4 review requests a day
-                </div>
-                <ul className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      100 review requests/month
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      10 AI responses
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      Zapier automation
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      24/7 email support
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      Free setup call
-                    </span>
-                  </li>
-                </ul>
-                <Button className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base py-2.5 h-auto">
-                  Start 14-day Free Trial →
-                </Button>
-              </div>
-
-              {/* SMB Plan */}
-              <div className="relative bg-background rounded-2xl border p-6 sm:p-8">
-                <div className="absolute -top-3 right-4 sm:right-8 bg-gradient-to-r from-primary to-blue-900 text-white text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-full">
-                  RECOMMENDED
-                </div>
-                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
-                  SMB
-                </h3>
-                <div className="flex items-baseline gap-1">
-                  {isAnnual && (
-                    <span className="text-gray-500 line-through text-base sm:text-lg">
-                      $79
-                    </span>
-                  )}
-                  <span className="text-3xl sm:text-4xl font-bold">
-                    ${isAnnual ? "47" : "79"}
-                  </span>
-                  <span className="text-gray-500">/mo</span>
-                </div>
-                <div className="text-xs sm:text-sm mt-2">
-                  {isAnnual ? (
-                    <span className="text-green-500">
-                      Annual billing saves you $384
-                    </span>
-                  ) : (
-                    "Monthly billing"
-                  )}
-                </div>
-                <div className="mt-3 sm:mt-4 text-gray-500 text-sm">
-                  ~25 review requests a day
-                </div>
-                <ul className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      750 review requests/month
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      Unlimited AI responses
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      Zapier automation
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      24/7 email support
-                    </span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                    <span className="text-sm sm:text-base">
-                      Free setup call
-                    </span>
-                  </li>
-                </ul>
-                <Button className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base py-2.5 h-auto">
-                  Start 14-day Free Trial →
-                </Button>
-              </div>
-
-              {/* Enterprise Plan */}
-              <div className="relative bg-background rounded-2xl border p-6 sm:p-8 flex flex-col">
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">
-                    Enterprise
-                  </h3>
-                  <div className="flex items-baseline gap-1">
-                    {isAnnual && (
-                      <span className="text-gray-500 line-through text-base sm:text-lg">
-                        $199
-                      </span>
-                    )}
-                    <span className="text-3xl sm:text-4xl font-bold">
-                      ${isAnnual ? "119" : "199"}
-                    </span>
-                    <span className="text-gray-500">/mo</span>
-                  </div>
-                  <div className="text-xs sm:text-sm mt-2">
-                    {isAnnual ? (
-                      <span className="text-green-500">
-                        Annual billing saves you $960
-                      </span>
-                    ) : (
-                      "Monthly billing"
-                    )}
-                  </div>
-                  <div className="mt-3 sm:mt-4 text-gray-500 text-sm">
-                    Ideal for high customer volume
-                  </div>
-                </div>
-                <div className="flex-1 flex flex-col">
-                  <ul className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm sm:text-base">
-                        3000 review requests/month
-                      </span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm sm:text-base">
-                        Everything in SMB Plan
-                      </span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 text-green-500 flex-shrink-0" />
-                      <span className="text-sm sm:text-base">
-                        Priority support
-                      </span>
-                    </li>
-                  </ul>
-                  <div className="flex-1"></div>
-                  <Button className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base py-2.5 h-auto">
-                    Start 14-day Free Trial →
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <BillingSection />
 
         {/* Blog Section */}
         <section id="blog" className="py-12 sm:py-16 md:py-20">
@@ -1295,161 +830,6 @@ export default function LandingPage() {
                   </div>
                 </div>
               </article>
-            </div>
-          </div>
-        </section>
-
-        <section
-          className="bg-primary text-primary-foreground py-12 sm:py-16 md:py-20"
-          id="contact"
-        >
-          <div className="container px-4 md:px-6">
-            <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-start">
-              <div className="space-y-4">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tighter">
-                  Contact Us
-                </h2>
-                <p className="text-primary-foreground/80 text-base sm:text-lg md:text-xl">
-                  Have questions about our services? Get in touch with our team
-                  and we&apos;ll be happy to help you.
-                </p>
-
-                <div className="space-y-4 sm:space-y-6 mt-6 sm:mt-8">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="bg-white/10 p-2.5 sm:p-3 rounded-full">
-                      <Mail className="h-5 w-5 sm:h-6 sm:w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg sm:text-xl">Email</h3>
-                      <p className="text-primary-foreground/80 text-sm sm:text-base mt-0.5 sm:mt-1">
-                        faizan@echosync.ai
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="bg-white/10 p-2.5 sm:p-3 rounded-full">
-                      <Smartphone className="h-5 w-5 sm:h-6 sm:w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg sm:text-xl">Phone</h3>
-                      <p className="text-primary-foreground/80 text-sm sm:text-base mt-0.5 sm:mt-1">
-                        215-205-9732
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    <div className="bg-white/10 p-2.5 sm:p-3 rounded-full">
-                      <Globe className="h-5 w-5 sm:h-6 sm:w-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg sm:text-xl">Office</h3>
-                      <p className="text-primary-foreground/80 text-sm sm:text-base mt-0.5 sm:mt-1">
-                        2302 E Dakota St, Philadelphia PA 19125
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-5 sm:p-6 md:p-8">
-                <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-5 sm:mb-6">
-                  Send us a message
-                </h3>
-
-                <form
-                  className="space-y-4"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const name = (
-                      document.getElementById("name") as HTMLInputElement
-                    ).value;
-                    const email = (
-                      document.getElementById("email") as HTMLInputElement
-                    ).value;
-                    const subject = (
-                      document.getElementById("subject") as HTMLInputElement
-                    ).value;
-                    const message = (
-                      document.getElementById("message") as HTMLTextAreaElement
-                    ).value;
-
-                    const mailtoLink = `mailto:faizan@echosync.ai?subject=${encodeURIComponent(
-                      subject
-                    )}&body=${encodeURIComponent(
-                      `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-                    )}`;
-                    window.location.href = mailtoLink;
-                  }}
-                >
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="name"
-                        className="text-sm font-medium text-gray-900 dark:text-gray-200"
-                      >
-                        Name
-                      </label>
-                      <input
-                        id="name"
-                        type="text"
-                        placeholder="Your name"
-                        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label
-                        htmlFor="email"
-                        className="text-sm font-medium text-gray-900 dark:text-gray-200"
-                      >
-                        Email
-                      </label>
-                      <input
-                        id="email"
-                        type="email"
-                        placeholder="Your email"
-                        className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="subject"
-                      className="text-sm font-medium text-gray-900 dark:text-gray-200"
-                    >
-                      Subject
-                    </label>
-                    <input
-                      id="subject"
-                      type="text"
-                      placeholder="How can we help you?"
-                      className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="message"
-                      className="text-sm font-medium text-gray-900 dark:text-gray-200"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      placeholder="Your message"
-                      rows={4}
-                      className="w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-                    ></textarea>
-                  </div>
-
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2.5 h-auto text-sm sm:text-base">
-                    Send Message
-                  </Button>
-                </form>
-              </div>
             </div>
           </div>
         </section>

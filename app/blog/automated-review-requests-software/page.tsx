@@ -1,41 +1,17 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  BlogHeaderWrapper,
+  BlogCTAWrapper,
+} from "../../components/blog-client-wrapper";
 
 export default function BlogPost() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-14 sm:h-16 items-center justify-between px-4 md:px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <Image
-              src="/echosync-logo.png"
-              alt="EchoSync Logo"
-              width={140}
-              height={37}
-              priority
-              className="object-contain w-[140px] sm:w-[200px]"
-            />
-          </Link>
-          <div className="flex items-center gap-4">
-            <Button asChild variant="ghost" size="sm">
-              <Link href="/blog" className="gap-2">
-                Blog
-              </Link>
-            </Button>
-            <Button asChild variant="ghost" size="sm">
-              <Link href="/" className="gap-2">
-                <ArrowLeft className="h-4 w-4" />
-                Back to Home
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <BlogHeaderWrapper />
 
       <main className="py-12">
         <article className="container px-4 md:px-6">
@@ -294,21 +270,7 @@ export default function BlogPost() {
               </section>
 
               {/* CTA Section */}
-              <div className="bg-primary/5 rounded-xl p-8 sm:p-10 mt-16">
-                <h3 className="!mt-0 !mb-4 text-2xl">
-                  Ready to Boost Your Reviews?
-                </h3>
-                <p className="!mb-8 text-lg">
-                  Start collecting more reviews automatically with EchoSync. Try
-                  it free for 14 days, no credit card required.
-                </p>
-                <Button
-                  asChild
-                  className="bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary"
-                >
-                  <Link href="/signup">Start Your Free Trial →</Link>
-                </Button>
-              </div>
+              <BlogCTAWrapper />
             </div>
           </div>
         </article>
