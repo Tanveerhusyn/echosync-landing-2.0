@@ -58,8 +58,9 @@ export default async function LandingPage() {
                     size="lg"
                     className="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base h-auto"
                   >
-                    Start 14-day Free Trial
-                    <ArrowRight className="ml-2 h-4 w-4" />
+                    <Link href="https://admin.echosync.ai/">
+                      Start 14-day Free Trial
+                    </Link>
                   </Button>
                   <Button
                     size="lg"

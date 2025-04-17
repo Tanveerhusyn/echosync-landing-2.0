@@ -89,7 +89,7 @@ export default function Navbar() {
             asChild
             className="bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm px-3 sm:px-4 h-auto py-2"
           >
-            <Link href="/signup">Get Started</Link>
+            <Link href="https://admin.echosync.ai/">Get Started</Link>
           </Button>
           <button
             className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
