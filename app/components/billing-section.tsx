@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { CheckCircle } from "lucide-react";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function BillingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -104,12 +104,14 @@ export default function BillingSection() {
                 <span className="text-sm sm:text-base">Free setup call</span>
               </li>
             </ul>
-            <Link
-              href="https://admin.echosync.ai/"
+            <Button
+              onClick={() => {
+                window.location.href = "https://admin.echosync.ai/";
+              }}
               className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base py-2.5 h-auto"
             >
               Start 14-day Free Trial →
-            </Link>
+            </Button>
           </div>
 
           {/* SMB Plan */}
@@ -167,12 +169,14 @@ export default function BillingSection() {
                 <span className="text-sm sm:text-base">Free setup call</span>
               </li>
             </ul>
-            <Link
-              href="https://admin.echosync.ai/"
+            <Button
+              onClick={() => {
+                window.location.href = "https://admin.echosync.ai/";
+              }}
               className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base py-2.5 h-auto"
             >
               Start 14-day Free Trial →
-            </Link>
+            </Button>
           </div>
 
           {/* Enterprise Plan */}
@@ -225,12 +229,14 @@ export default function BillingSection() {
                 </li>
               </ul>
               <div className="flex-1"></div>
-              <Link
-                href="https://admin.echosync.ai/"
+              <Button
+                onClick={() => {
+                  window.location.href = "https://admin.echosync.ai/";
+                }}
                 className="w-full mt-6 sm:mt-8 bg-gradient-to-r from-primary to-blue-900 hover:from-blue-900 hover:to-primary text-sm sm:text-base py-2.5 h-auto"
               >
                 Start 14-day Free Trial →
-              </Link>
+              </Button>
             </div>
           </div>
         </div>
