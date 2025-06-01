@@ -66,12 +66,6 @@ export default function Navbar() {
           </Link>
         </nav>
         <div className="flex items-center gap-2 sm:gap-4">
-          <Link
-            href="/login"
-            className="text-sm font-medium hover:text-primary hidden sm:block"
-          >
-            Login
-          </Link>
           <Button
             variant="outline"
             className="text-sm px-3 py-2 h-auto"
@@ -144,13 +138,6 @@ export default function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Blog
-              </Link>
-              <Link
-                href="/login"
-                className="text-sm font-medium hover:text-primary"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Login
               </Link>
             </div>
           </nav>
